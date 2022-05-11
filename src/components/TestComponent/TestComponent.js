@@ -9,7 +9,8 @@ export class TestComponent extends Component {
 
     this.state = {
       firstDate: null,
-      secondDate: null
+      secondDate: null,
+      hidden: true
     };
   }
   
@@ -37,17 +38,22 @@ export class TestComponent extends Component {
 
   hideInutText(id, isTouched) {
     const input = document.querySelector(id);
+
     if(isTouched) {
-      input.classList.add('hiden');
+      input.classList.add('hidden');
+      this.setState({
+        hidden: true
+      });
     } else {
-      if (input.classList.length > 0) {
-        input.classList.remove('hiden');
-      }
+      input.classList.remove('hidden');
+      this.setState({
+        hidden: false
+      });
     }
   }
 
   render() {
-    const { firstDate, secondDate } = this.state;
+    const { firstDate, secondDate, hidden } = this.state;
 
     return (
       <div>
@@ -58,22 +64,21 @@ export class TestComponent extends Component {
           <div className='date-wrapper'>
             <DatePicker
               id="dp1"
-              //hintText="First Date Picker"
+              hintText="First Date Picker"
               container="inline"
               value={firstDate}
               onChange={this.handleFirstDateChange}
-            >
-            </DatePicker>
+            />
           </div>
           <div className='date-wrapper'>
             <DatePicker
               id="dp2"
-              //hintText="Second Date Picker"
+              hintText="Second Date Picker"
               container="inline"
               value={secondDate}
               onChange={this.handleSecondDateChange}
-            >
-            </DatePicker>
+              hintStyle={{opacity: Number(hidden)}}
+            />
           </div>
         </div>
       </div>
