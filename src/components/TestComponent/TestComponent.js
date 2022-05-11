@@ -12,17 +12,39 @@ export class TestComponent extends Component {
       secondDate: null
     };
   }
-
+  
   handleFirstDateChange = (event, date) => {
-    this.setState({
-      firstDate: date,
-    });
+    if (this.state.secondDate === null) {
+      this.setState({
+        firstDate: date,
+        secondDate: date,
+      });
+      this.hideInutText('#dp2', true);
+    } else {
+      this.setState({
+        firstDate: date,
+      });
+      this.hideInutText('#dp2',false);
+    }
   };
+
   handleSecondDateChange = (event, date) => {
     this.setState({
-      secondDate: date,
+      secondDate: date
     });
+    this.hideInutText('#dp2', false);
   };
+
+  hideInutText(id, isTouched) {
+    const input = document.querySelector(id);
+    if(isTouched) {
+      input.classList.add('hiden');
+    } else {
+      if (input.classList.length > 0) {
+        input.classList.remove('hiden');
+      }
+    }
+  }
 
   render() {
     const { firstDate, secondDate } = this.state;
@@ -36,8 +58,8 @@ export class TestComponent extends Component {
           <div className='date-wrapper'>
             <DatePicker
               id="dp1"
+              //hintText="First Date Picker"
               container="inline"
-              hintText="First Date input"
               value={firstDate}
               onChange={this.handleFirstDateChange}
             >
@@ -46,8 +68,8 @@ export class TestComponent extends Component {
           <div className='date-wrapper'>
             <DatePicker
               id="dp2"
+              //hintText="Second Date Picker"
               container="inline"
-              hintText="Second Date input"
               value={secondDate}
               onChange={this.handleSecondDateChange}
             >

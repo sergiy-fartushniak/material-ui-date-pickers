@@ -1,7 +1,6 @@
 {
   "name": "date-picker",
   "version": "0.1.0",
-  "private": true,
   "homepage": "https://sergiy-fartushniak.github.io",
   "dependencies": {
     "gh-pages": "^3.2.3",

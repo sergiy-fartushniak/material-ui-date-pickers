@@ -9,3 +9,11 @@
   width: 600px;
   justify-content: space-between;
 }
+
+.date-wrapper {
+  position: relative;
+}
+
+.hiden {
+  color: transparent !important;
+}
